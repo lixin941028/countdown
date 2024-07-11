@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+      body {
+      /* 使用线性渐变，从顶部到底部 */
+      background: linear-gradient(to bottom, #07417e, #248bb0, #85c8e0);
+      /* 全屏渐变 */
+      height: 100vh;
+      /* 确保内容垂直居中 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* 设置文本样式 */
+      color: rgb(255, 255, 255);
+      font-size: 100px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+
+
+  /* 滑轨 */
+  input[type=range] {
+     -webkit-appearance: none; /*清除默认样式 */
+    height: 20px; /* 设置滑轨的高度 */
+    background: #304886; /* 设置滑轨的背景颜色 */
+    border-radius: 10px; /* 设置滑轨的圆角 */
+    outline: none; /* 清除点击时的边框 */
+    opacity: 0.8; /* 设置滑轨的透明度 */
+    transition: opacity 0.15s ease-in-out; /* 添加过渡效果 */
+  }
+
+  /* 滑块 */
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;   /*清除默认样式 */
+    appearance: none;
+    width: 30px; /* 设置滑块的宽度 */
+    height: 30px; /* 设置滑块的高度 */
+    background: #9de39f; /* 设置滑块的背景颜色 */
+    cursor: pointer; /* 设置滑块为指针形状 */
+    border-radius: 100%; /* 设置滑块为圆形 */
+    border: 2px solid #fff; /* 设置滑块的边框 */
+    transition: background-color 0.15s ease-in-out; /* 添加过渡效果 */
+  }
+
+  /* 滑块悬停时 */
+  input[type=range]::-webkit-slider-thumb:hover {
+    background-color: #7ab97d; /* 滑块悬停时的背景颜色 */
+  }
+
+  /* 滑块按下时 */
+  input[type=range]::-webkit-slider-thumb:active {
+    background-color: #26972a; /* 滑块按下时的背景颜色 */
+  }
+
+
+
+
+         /* 整体背景样式 */
+        .container {
+            width: 100vh;
+            height: 100vh;
+            display: flex;
+            flex-direction: column; /* 垂直排列 */
+            cursor: pointer;
+        }
+        #clock {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .time-input {
+            width: 100px;
+            height: 50px;
+            font-size: 45px;
+            background: linear-gradient(to bottom, #024d80, #06a1d9, #85c8e0);
+            border-radius: 10px; /* 圆角半径为5px，可以根据需要调整 */
+            padding: 10px; /* 可选：增加内边距以改善外观 */
+            border: 6px solid #7ed6e592; /* 可选：添加边框 */
+        }
+        .time-slider {
+           width: 150px; /* 调整为你希望的宽度，例如80% */
+           background: #a83d4a; /* 默认背景颜色 */
+           outline: none; /* 移除默认的轮廓 */
+           opacity: 0.8; /* 滑块的透明度 */
+           transition: opacity .15s ease-in-out; /* 渐变过渡效果 */
+           cursor: pointer; /* 鼠标悬停时显示指针 */
+           border-radius: 5px; /* 滑块的圆角 */
+           /* margin-left: -20px; 向右移动20px */
+           /* transform: rotate(270deg); 将滑动条逆时针旋转270度，实现垂直显示 */
+        }
+        /* logo样式 */
+        .row{
+            width: 100%;
+            height: 30vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* border:2px solid yellow; */
+        }
+        /* 数显样式 */
+        .clock-cell{
+            width: 100%;
+            height: 30vh;
+            font-size:200px; /* 数字显示大小 */
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            /* border: 2px solid pink; */
+        }
+         /* 滑动条设置
+        .slider{
+            width: 100%;
+            height: 10vh;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border:2px solid green;
+        } */
+        /* 数显设置 */
+        .control-panel{
+            width: 100%;
+            height: 40vh;
+            font-size: 55px;
+            justify-content: center;
+            align-items: center;
+            /* border:2px solid green; */
+        }
+        .control-set{
+            width: 100%;
+            font-size: 55px;
+            justify-content: center;
+            align-items: center;
+            /* border:2px solid rgb(128, 0, 6); */
+        }
+        .control-buttons{
+            width: 130px;
+            font-size: 40px;
+            color: white; /* 字体颜色 */
+            background-image: url('按钮.jpg');
+            background-size: cover; /* 可选：覆盖整个背景 */
+            background-position: center; /* 可选：设置背景位置 */
+            /* border-radius: 30px; /* 圆角半径为5px，可以根据需要调整 */
+            padding: 10px; /*可选：增加内边距以改善外观 */
+            /* border: 6px solid #605bca92; 可选：添加边框 */ 
+        }
+        .control-buttons2{
+            width: 250px;
+            font-size: 35px;
+            color: white; /* 字体颜色 */
+            border-radius: 80px; /* 圆角半径为5px，可以根据需要调整 */
+            background: linear-gradient(to bottom, #024d80, #06a1d9, #85c8e0);
+            padding: 10px; /* 可选：增加内边距以改善外观 */
+            border: 6px solid #0f4c8e8b; /* 可选：添加边框 */
+        }
+
+
+
+
+        #fullscreen-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    z-index: 1000; /* 确保按钮在其他内容之上 */
+  }
+
+
+
+
+    </style>
+</head>
+<body>
+
+
+    <button id="fullscreen-button">全屏</button>
+
+
+
+    <div class="container" onmousedown="show('btn_tr')">
+        <!-- 图标 -->
+        <div class="row">
+                <img src="logo.png" >
+        </div>
+        <!-- 数显 -->
+        <div class="clock-cell">
+            <div id="clock" >00:00:00</div>
+        </div>
+        <!-- 滑动条
+        <div class="slider">
+
+        </div> -->
+        <!-- 设置数显 -->
+        <div class="control-panel" id="btn_tr">
+            <div class="control-set">         
+                <input id="hinput" class="time-input" type="number" value="00" min="0" max="99">  时            
+                <input id="minput" class="time-input" type="number" value="00" min="0" max="59">  分         
+                <input id="sinput" class="time-input" type="number" value="00" min="0" max="59">  秒
+                <br>
+        
+                <input type="range" id="hslider" min="0" max="23" value="0" class="time-slider">&nbsp;&nbsp;&nbsp;
+                <input type="range" id="mslider" min="0" max="59" value="0" class="time-slider">&nbsp;&nbsp;&nbsp;
+                <input type="range" id="sslider" min="0" max="59" value="0" class="time-slider">&nbsp;&nbsp;&nbsp;&nbsp;
+                <br>
+                <br>
+                <br>
+                <input id="setB" type="button" value="设置" onclick="setTime()" class="control-buttons">
+                <input id="startB" type="button" value="开始" onclick="run()" class="control-buttons">
+                <input id="pauseB" type="button" value="暂停" onclick="pause()" class="control-buttons">
+                <input id="endB" type="button" value="停止" onclick="stop()" class="control-buttons">
+                 <br>
+                 <br>
+                <input id="hiddenB" type="button" value="隐藏控制面板" onclick="hid('btn_tr')" class="control-buttons2">
+                <br>
+                <input id="clockHidden" type="hidden" value="00:00:00"> 
+             </div> 
+   
+    </div>
+
+    <script language="Javascript">
+
+        var normalelapse = 1000;
+        var nextelapse = normalelapse;
+        var counter;
+        var startTime;
+        //var start = clock.innerText;
+        var finish = "00:00:00";
+        var timer = null;
+
+    // 获取所有的滑动条和对应的值显示元素
+    var sliders = document.querySelectorAll(".slider");
+    var outputs = document.querySelectorAll("[id^=sliderValue]");
+
+    // 初始显示每个滑动条的值
+    for (var i = 0; i < sliders.length; i++) {
+        outputs[i].innerHTML = sliders[i].value;
+    }
+
+    // 当滑动条的值改变时，更新对应的值显示元素
+    sliders.forEach(function(slider, index) {
+        slider.oninput = function() {
+            outputs[index].innerHTML = this.value;
+        }
+    });
+
+        function fullscreen() {
+            var WshShell = new ActiveXObject('WScript.Shell')
+            WshShell.SendKeys('{F11}');
+        }
+        // function pauseImage() {
+        //     pause();
+        //     image.innerHTML = "<img  src='开始.png' onmousemove=\"this.src='开始.png'\" onmouseout=\"this.src='开始.png'\"  onclick='startImage();' style='cursor: pointer' title='Continue'/>";
+        // }
+        // function startImage() {
+        //     run();
+        //     image.innerHTML = "<img  onmousemove=\"this.src='结束.jpg'\" onmouseout=\"this.src='结束.jpg'\" src='结束.jpg'  onclick='pauseImage();' style='cursor: pointer' title='pause'/>";
+        // }
+        function show(id) {
+            document.getElementById(id).style.display = "block";
+        }
+
+        function hid(id) {
+            document.getElementById(id).style.display = "none";
+        }
+
+        function setTime() {
+            startB.disabled = false;
+            pauseB.disabled = true;
+            setB.disabled = false;
+            var s = sinput.value;
+            var m = minput.value;
+            var h = hinput.value;
+            if (isNaN(h) || isNaN(m) || isNaN(s)) {
+                return;
+            }
+
+            var sn = new Number(s);
+            var mn = new Number(m);
+            var hn = new Number(h);
+            var ss = sn < 10 ? ("0" + sn) : s;
+            var sm = mn < 10 ? ("0" + mn) : m;
+            var sh = hn < 10 ? ("0" + hn) : h;
+            var init = sh + ":" + sm + ":" + ss;
+
+            clock.innerHTML =   init ;
+            clockHidden.value = init;
+            window.clearTimeout(timer);
+            window.clearInterval(timer);
+        }
+        function reset() {
+            sinput.value = "00";
+            minput.value = "00";
+            hinput.value = "00";
+
+        }
+        // 开始运行
+        function run() {
+            startB.disabled = true;
+            pauseB.disabled = false;
+            setB.disabled = true;
+            endB.disabled = false;
+            counter = 0;
+            // 初始化开始时间
+            startTime = new Date().valueOf();
+
+            // nextelapse是定时时间, 初始时为100毫秒
+            // 注意setInterval函数: 时间逝去nextelapse(毫秒)后, onTimer才开始执行
+            timer = window.setInterval("onTimer()", nextelapse);
+        }
+
+        // 暂停
+        function pause() {
+            startB.disabled = false;
+            pauseB.disabled = true;
+            setB.disabled = false;
+            window.clearTimeout(timer);
+        }
+        //停止
+        function stop() {
+            startB.disabled = false;
+            pauseB.disabled = true;
+            setB.disabled = false;
+            endB.disabled = true;
+            sinput.value = "00";
+            minput.value = "00";
+            hinput.value = "00";
+            hslider.value = "00";
+            mslider.value = "00";
+            sslider.value = "00";
+            clock.innerHTML = "00:00:00"
+            clockHidden.value = "00:00:00";
+            window.clearTimeout(timer);
+            window.clearInterval(timer);
+        }
+        window.onload = function () {
+            pauseB.disabled = true;
+        }
+
+        // 倒计时函数
+        function onTimer() {
+
+            if (clockHidden.value == finish) {
+                window.clearInterval(timer);
+                clock.innerHTML = "<strong><font color=#FF0000 >时间到！</font></strong>"
+                startB.disabled = true;
+                pauseB.disabled = true;
+                setB.disabled = false;
+                endB.disabled = true;
+                return;
+            }
+
+            //var hms = new String(clock.innerText).split(":");
+            var hms = new String(clockHidden.value).split(":");
+            //var ms = new Number(hms[3]);
+            var s = new Number(hms[2]);
+            var m = new Number(hms[1]);
+            var h = new Number(hms[0]);
+            s -= 1;
+            if (s < 0) {
+                s = 59;
+                m -= 1;
+            }
+
+            if (m < 0) {
+                m = 59;
+                h -= 1;
+            }
+            var ss = s < 10 ? ("0" + s) : s;
+            var sm = m < 10 ? ("0" + m) : m;
+            var sh = h < 10 ? ("0" + h) : h;
+
+            //start = sh + ":" + sm + ":" + ss + ":" + ms;
+            var nowtime = sh + ":" + sm + ":" + ss;
+            clock.innerHTML =  nowtime ;
+            //倒计时1分钟时时间变红色
+            if (s <= 59 && m == 0 && h == 0) {
+                //setTimeout("onTimer2()",200);//红色时间闪烁
+                clock.innerHTML = "<strong><font color=#bb0000>" + nowtime + "</font></strong>"
+            }
+            clockHidden.value = nowtime;
+            // 清除上一次的定时器
+            window.clearInterval(timer);
+
+            // 自校验系统时间得到时间差, 并由此得到下次所启动的新定时器的时间nextelapse
+            counter++;
+            var counterSecs = counter * 1000;
+            var elapseSecs = new Date().valueOf() - startTime;
+            var diffSecs = counterSecs - elapseSecs;
+            nextelapse = normalelapse + diffSecs;
+            //diff.value = counterSecs + "-" + elapseSecs + "=" + diffSecs;
+            //next.value = "nextelapse = " + nextelapse;
+            if (nextelapse < 0) nextelapse = 0;
+
+            // 启动新的定时器
+            timer = window.setInterval("onTimer()", nextelapse);
+        }
+        function onTimer2() {
+            var hms = new String(clockHidden.value);
+            clock.innerHTML =  hms ;
+        }
+        function fullscreen() {
+            var WsShell = new ActiveXObject('WScript.Shell')
+            WsShell.SendKeys('{F11}');
+        }
+        /*
+        function onTimer3(){
+            var hms = new String(clockHidden.value);
+            clock.innerHTML = "<strong><font color=#8b0000>"+hms+"</font></strong>";
+        }
+        */
+
+       // 当文档加载完成后执行  
+       document.addEventListener('DOMContentLoaded', function() {  
+            // 获取元素引用  
+            var hinput = document.getElementById("hinput");  
+            var hslider = document.getElementById("hslider"); 
+            var minput = document.getElementById("minput");  
+            var mslider = document.getElementById("mslider");
+            var sinput = document.getElementById("sinput");  
+            var sslider = document.getElementById("sslider"); 
+  
+            // 监听文本输入框的 input 事件  
+            hinput.addEventListener('input', function() {  
+                var inputValue = parseInt(hinput.value, 10);  
+                // 检查输入是否为有效的小时数  
+                if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 23) {  
+                    hslider.value = inputValue; // 同步滑块的值  
+                } else {  
+                    // 如果输入无效，重置为滑块的值  
+                    hinput.value = hslider.value;  
+                }  
+            });  
+            minput.addEventListener('input', function() {  
+                var inputValue = parseInt(minput.value, 10);  
+                // 检查输入是否为有效的小时数  
+                if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 23) {  
+                    mslider.value = inputValue; // 同步滑块的值  
+                } else {  
+                    // 如果输入无效，重置为滑块的值  
+                    minput.value = mslider.value;  
+                }  
+            }); 
+            sinput.addEventListener('input', function() {  
+                var inputValue = parseInt(sinput.value, 10);  
+                // 检查输入是否为有效的小时数  
+                if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 23) {  
+                    sslider.value = inputValue; // 同步滑块的值  
+                } else {  
+                    // 如果输入无效，重置为滑块的值  
+                    sinput.value = sslider.value;  
+                }  
+            }); 
+  
+            // 监听滑块控件的 input 事件  
+            hslider.addEventListener('input', function() {  
+                var sliderValue = parseInt(hslider.value, 10);  
+                hinput.value = sliderValue; // 同步文本输入框的值 ，整数，10进制
+            });  
+            mslider.addEventListener('input', function() {  
+                var sliderValue = parseInt(mslider.value, 10);  
+                minput.value = sliderValue; // 同步文本输入框的值  
+            });  
+            sslider.addEventListener('input', function() {  
+                var sliderValue = parseInt(sslider.value, 10);  
+                sinput.value = sliderValue; // 同步文本输入框的值  
+            });  
+        });  
+
+
+
+
+
+        var fullscreenButton = document.getElementById('fullscreen-button');
+
+// 点击按钮进入全屏模式
+fullscreenButton.addEventListener('click', function() {
+  var elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+});
+
+// 页面加载时自动进入全屏模式
+document.addEventListener('DOMContentLoaded', function() {
+  var elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+});
+
+
+
+
+    </script>
+
+</body>
+</html>
